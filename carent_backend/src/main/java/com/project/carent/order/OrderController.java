@@ -28,7 +28,7 @@ public class OrderController {
         return ResponseEntity.accepted().body(orderService.createOrder(orderDto));
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/one")
     public ResponseEntity<?> deleteOrder(@RequestParam UUID id) {
         return ResponseEntity.ok().body(orderService.deleteOrderById(id));
     }

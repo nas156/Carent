@@ -13,7 +13,9 @@ import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
-    @Query(value = "select u.id as id, u.addDate as addDate, u.firstName as frirstName, u.lastName as lastName, size(u.orders) as numberOfOrders from User u")
+    @Query(value = "select u.id as id, u.addDate as addDate, u.passportNumber as passportNumber, " +
+            "u.firstName as firstName, u.lastName as lastName," +
+            "size(u.orders) as numberOfOrders from User u order by u.editDate")
     List<FetchUserDto> getAllUsers();
 
     @Modifying

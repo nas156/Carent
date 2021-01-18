@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     final UserService userService;
@@ -18,9 +18,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/test")
+    @GetMapping(value = "/health-check")
     public String getTestMessage() {
-        return "Test is ok";
+        return "Ok";
     }
 
     @GetMapping(value = "/all")
@@ -28,7 +28,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping(value = "/edit")
+    @PutMapping(value = "/edit")
     public ResponseEntity<?> editUser(@RequestParam UUID id, @RequestBody UserDto userDto) {
         return ResponseEntity.accepted().body(userService.editUser(id, userDto));
     }

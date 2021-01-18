@@ -20,7 +20,7 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
     @Query(value = "update Car c set c.description = :description, c.rentalCost = :rentalCost, c.number = :newNumber where c.id = :id")
     void editCar(UUID id, Integer newNumber, String description, Integer rentalCost);
 
-    @Query(value = "select c.id as id, c.number as number, c.description as description, c.rentalCost as rentalCost, size(c.orders) as numberOfRents from Car c")
+    @Query(value = "select c.id as id, c.number as number, c.description as description, c.rentalCost as rentalCost, size(c.orders) as numberOfRents from Car c order by c.number")
     List<FetchCarDto> getAllCars();
 
     Optional<Car> findCarByNumber(Integer number);

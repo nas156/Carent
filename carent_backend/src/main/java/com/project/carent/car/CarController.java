@@ -33,7 +33,7 @@ public class CarController {
         return ResponseEntity.ok().body(carService.deleteCarById(id));
     }
 
-    @PostMapping(value = "/edit")
+    @PutMapping(value = "/edit")
     public ResponseEntity<?> editCar(@RequestBody CarDto carDto, @RequestParam UUID id) {
         return ResponseEntity.accepted().body(carService.editCar(carDto, id));
     }

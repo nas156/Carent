@@ -2,5 +2,10 @@
     height: 100vh;
     display: flex;
     flex-flow: column;
-    justify-content: space-between;
+    padding-bottom: 3em;
+}
+
+.mainTable {
+    align-self: center;
+    width: 80%;
 }

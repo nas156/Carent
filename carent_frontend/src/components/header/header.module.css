@@ -1,4 +1,7 @@
 .header {
     align-self: center;
+    position: sticky;
+    margin-bottom: 2em;
+    top: 0;
     width: 80%;
 }

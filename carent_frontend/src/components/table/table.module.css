@@ -1,0 +1,9 @@
+.table {
+    width: 100%;
+    align-self: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}

@@ -1,11 +1,17 @@
 import React, {useState} from "react";
 import style from "./header.module.css"
 import {Menu} from "semantic-ui-react";
+import {useHistory} from "react-router";
 
 const Header = (props) => {
     const [activeItem, setActiveItem] = useState("cars");
 
-    const handleItemClick = (e, {name}) => setActiveItem(name);
+    const history = useHistory();
+    
+    const handleItemClick = (e, {name}) => {
+        setActiveItem(name);
+        history.push(`/${name}`)
+    };
 
     return (
         <div className={style.header}>

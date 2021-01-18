@@ -1,4 +1,6 @@
 .footer_text {
+    position: fixed;
+    bottom: 0;
     padding: 10px;
     width: auto;
     align-self: center;

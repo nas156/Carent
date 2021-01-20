@@ -4,3 +4,6 @@ node_modules/
 build/
 package-lock.json
 .eslintcache
+/carent_backend/.gradle/
+/carent_backend/.idea/
+/carent_backend/build/

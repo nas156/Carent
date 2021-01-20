@@ -1,5 +1,4 @@
-.idea
-carent_backend/.gradle
-carent_frontend/node_modules
-carent_backend/build
-carent_backend/.idea
+.idea/
+.gradle/
+node_modules/
+build/

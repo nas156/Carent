@@ -1,17 +1,9 @@
-package com.project.carent.user.dto;
+package com.project.carent.admins.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@Builder
-public class UserDto {
-    private Integer passportNumber;
-    private String password;
-    private String firstName;
-    private String lastName;
+public class AdminDto {
+    private String email;
+    private String name;
 }

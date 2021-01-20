@@ -3,7 +3,7 @@ package com.project.carent.order;
 import com.project.carent.car.CarService;
 import com.project.carent.order.dto.FetchOrderDto;
 import com.project.carent.order.dto.OrderDto;
-import com.project.carent.user.UserService;
+import com.project.carent.client.ClientService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,12 +14,12 @@ import java.util.UUID;
 public class OrderService {
 
     final OrderRepository orderRepository;
-    final UserService userService;
+    final ClientService clientService;
     final CarService carService;
 
-    public OrderService(OrderRepository orderRepository, UserService userService, CarService carService) {
+    public OrderService(OrderRepository orderRepository, ClientService clientService, CarService carService) {
         this.orderRepository = orderRepository;
-        this.userService = userService;
+        this.clientService = clientService;
         this.carService = carService;
     }
 
@@ -36,7 +36,7 @@ public class OrderService {
         var order = Order
                 .builder()
                 .car(carService.getCarByNumber(orderDto.getCarNumber()))
-                .user(userService.getUserByPassport(orderDto.getUserPassport()))
+                .client(clientService.getUserByPassport(orderDto.getUserPassport()))
                 .addDate(LocalDate.now())
                 .rentalTime(orderDto.getRentalTime())
                 .build();

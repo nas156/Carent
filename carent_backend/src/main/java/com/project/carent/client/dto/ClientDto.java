@@ -1,4 +1,4 @@
-package com.project.carent.user.dto;
+package com.project.carent.client.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class UserDto {
+public class ClientDto {
     private Integer passportNumber;
     private String password;
     private String firstName;

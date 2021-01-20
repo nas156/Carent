@@ -60,10 +60,11 @@ const Users = ({
 
     const onEditClick = user => {
         setCurrentId(user.id);
-        setFirstName(user.number);
-        setAddDate(user.description);
-        setLastName(user.numberOfRents);
-        setNumberOfOrders(user.rentalCost);
+        setFirstName(user.firstName);
+        setAddDate(user.addDate);
+        setLastName(user.lastName);
+        setNumberOfOrders(user.numberOfOrders);
+        setPassportNumber(user.passportNumber);
         setShowModal(true);
     }
 
@@ -71,7 +72,7 @@ const Users = ({
         <div className="mainTable">
             <ItemsTable
                 loading={loading}
-                addButton={{"onAdd": onAddClick, "loading": adding}}
+                addButton={{"onAdd": onAddClick, "loading": adding, "text":"Add user"}}
                 columns={["First name", "Last name", "Passport number", "Add date", "Number of rents"]}
                 buttons={[
                     {"name": "Edit", "click": onEditClick, "color": "blue", "disabled": editing},
@@ -86,7 +87,7 @@ const Users = ({
                 onApplyClick={editApplyClick}
                 content={{
                     "icon": "user",
-                    "title": "Change user",
+                    "title": "Change/Add user",
                     "fields":
                         [
                             {
@@ -115,7 +116,7 @@ const Users = ({
                                 "name": "Add date",
                                 "value": addDate,
                                 "change": setAddDate,
-                                "disabled": true
+                                "blocked": true
                             }
 
                         ]

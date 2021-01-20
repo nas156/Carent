@@ -1,6 +1,6 @@
-package com.project.carent.user;
+package com.project.carent.client;
 
-import com.project.carent.user.dto.FetchUserDto;
+import com.project.carent.client.dto.FetchClientDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,20 +13,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
-    @Query(value = "select u.id as id, u.addDate as addDate, u.passportNumber as passportNumber, " +
-            "u.firstName as firstName, u.lastName as lastName," +
-            "size(u.orders) as numberOfOrders from User u order by u.editDate")
-    List<FetchUserDto> getAllUsers();
+public interface ClientRepository extends JpaRepository<Client, UUID> {
+    @Query(value = "select c.id as id, c.addDate as addDate, c.passportNumber as passportNumber, " +
+            "c.firstName as firstName, c.lastName as lastName," +
+            "size(c.orders) as numberOfOrders from Client c order by c.editDate")
+    List<FetchClientDto> getAllUsers();
 
     @Modifying
     @Transactional
-    @Query(value = "update User u set u.firstName = :firstName, u.lastName = :lastName," +
-            "u.passportNumber = :passportNumber, u.password = :password, u.editDate = :date where u.id = :id")
+    @Query(value = "update Client c set c.firstName = :firstName, c.lastName = :lastName," +
+            "c.passportNumber = :passportNumber, c.password = :password, c.editDate = :date where c.id = :id")
     void editUser(UUID id, String firstName, String lastName, Integer passportNumber, String password, LocalDate date);
 
-    @Query(value = "select u.passportNumber from User u")
+    @Query(value = "select c.passportNumber from Client c")
     List<Integer> getAllPassports();
 
-    Optional<User> findUserByPassportNumber(Integer passportNumber);
+    Optional<Client> findUserByPassportNumber(Integer passportNumber);
 }

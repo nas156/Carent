@@ -1,4 +1,4 @@
-package com.project.carent.client;
+package com.project.carent.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,10 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "admin")
+@Table(name = "usr")
 @Entity
-public class Admin {
-
+public class User {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -34,6 +33,5 @@ public class Admin {
     private String email;
 
     @Column(name = "add_date")
-    private LocalDate addDate;
-
+    private LocalDate createdAt;
 }

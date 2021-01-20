@@ -1,4 +1,4 @@
-import {deleteUserRoutine, loadUsersRoutine} from "./routines";
+import {addUserRoutine, deleteUserRoutine, editUserRoutine, loadUsersRoutine} from "./routines";
 
 const initialState = {
     users: [],
@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-    switch (action.type){
+    switch (action.type) {
         case loadUsersRoutine.SUCCESS: {
             const users = action.payload.users;
             return ({
@@ -38,6 +38,35 @@ export default function (state = initialState, action) {
             return ({
                 ...state,
                 isDeleting: ""
+            });
+        }
+
+        case addUserRoutine.REQUEST: {
+            return ({
+                ...state,
+                isAdding: true
+            });
+        }
+
+        case addUserRoutine.SUCCESS: {
+            return ({
+                ...state,
+                isAdding: false
+            });
+        }
+
+        case editUserRoutine.REQUEST: {
+            const id = action.payload;
+            return ({
+                ...state,
+                isEditing: id
+            });
+        }
+
+        case editUserRoutine.SUCCESS: {
+            return ({
+                ...state,
+                isEditing: ""
             });
         }
 

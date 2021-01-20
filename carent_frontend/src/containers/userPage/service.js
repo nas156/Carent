@@ -2,7 +2,7 @@ import callWebApi from "../../helpers/api.helper";
 
 export const getAllUsers = async () => {
     const response = await callWebApi({
-        endpoint: "/api/users/all",
+        endpoint: "/api/clients/all",
         type: "GET"
     });
     return response.json();
@@ -10,7 +10,7 @@ export const getAllUsers = async () => {
 
 export const addUserRequest = async user => {
     const response = await callWebApi({
-        endpoint: "/api/users/add",
+        endpoint: "/api/clients/add",
         type: "POST",
         request: user
     });
@@ -19,7 +19,7 @@ export const addUserRequest = async user => {
 
 export const deleteUserRequest = async userId => {
     const response = await callWebApi({
-        endpoint: "/api/users/one",
+        endpoint: "/api/clients/one",
         type: "DELETE",
         query: {id: userId}
     });
@@ -28,7 +28,7 @@ export const deleteUserRequest = async userId => {
 
 export const editUserRequest = async (userId, user) => {
     const response = await callWebApi({
-        endpoint: "/api/users/edit",
+        endpoint: "/api/clients/edit",
         type: "PUT",
         query: {id: userId},
         request: user

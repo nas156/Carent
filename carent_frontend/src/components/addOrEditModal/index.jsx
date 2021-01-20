@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./modal.module.css";
-import {Button, Header, Icon, Input, Modal} from "semantic-ui-react";
+import {Button, Dropdown, Header, Icon, Input, Modal} from "semantic-ui-react";
 
 const AddEditModal = ({open, onCloseClick, onApplyClick, content}) => {
     return (
@@ -13,13 +13,26 @@ const AddEditModal = ({open, onCloseClick, onApplyClick, content}) => {
             <Modal.Content>
                 {content.fields.map(item => (
                     <div className={style.modal} key={item.name}>
-                        <Input
-                            disabled={item.blocked}
-                            fluid
-                            label={item.name}
-                            value={item.value}
-                            onChange={e => item.change(e.target.value)}
-                        />
+                        {
+                            item.dropdown ?
+                                <Dropdown
+                                    placeholder={item.name}
+                                    value={item.value}
+                                    fluid
+                                    loading={item.loading}
+                                    selection
+                                    search
+                                    options={item.options}
+                                    onChange={(e, { value }) => item.change(value)}
+                                /> :
+                                <Input
+                                    disabled={item.blocked}
+                                    fluid
+                                    label={item.name}
+                                    value={item.value}
+                                    onChange={e => item.change(e.target.value)}
+                                />
+                        }
                     </div>
                 ))}
             </Modal.Content>

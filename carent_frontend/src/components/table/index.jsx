@@ -40,7 +40,7 @@ const ItemsTable = ({columns, buttons, content, color, addButton, loading}) => (
                 ))}
             </Table.Body>
         </Table>
-        <Button color='green' floated='right' onClick={addButton.onAdd} disabled={addButton.loading}> Add </Button>
+        <Button color='green' floated='right' onClick={addButton.onAdd} disabled={addButton.loading}> {addButton.text} </Button>
     </Segment>
 );
 

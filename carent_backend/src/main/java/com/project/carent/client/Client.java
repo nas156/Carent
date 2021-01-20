@@ -1,7 +1,7 @@
-package com.project.carent.user;
+package com.project.carent.client;
 
 import com.project.carent.order.Order;
-import com.project.carent.user.dto.UserDto;
+import com.project.carent.client.dto.ClientDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,10 +17,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "usr")
+@Table(name = "clients")
 @Entity
-public class User {
-
+public class Client {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -45,16 +44,16 @@ public class User {
     @Column(name = "edit_date")
     private LocalDate editDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
     private List<Order> orders;
 
-    public static User fromDto(UserDto userDto) {
-        return User
+    public static Client fromDto(ClientDto clientDto) {
+        return Client
                 .builder()
-                .firstName(userDto.getFirstName())
-                .lastName(userDto.getLastName())
-                .password(userDto.getPassword())
-                .passportNumber(userDto.getPassportNumber())
+                .firstName(clientDto.getFirstName())
+                .lastName(clientDto.getLastName())
+                .password(clientDto.getPassword())
+                .passportNumber(clientDto.getPassportNumber())
                 .build();
     }
 }

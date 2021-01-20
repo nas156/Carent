@@ -1,7 +1,7 @@
 package com.project.carent.order;
 
 import com.project.carent.car.Car;
-import com.project.carent.user.User;
+import com.project.carent.client.Client;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,6 +37,6 @@ public class Order {
     private Car car;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "usr_id")
-    private User user;
+    @JoinColumn(name = "client_id")
+    private Client client;
 }

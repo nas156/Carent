@@ -1,9 +1,9 @@
-package com.project.carent.user.dto;
+package com.project.carent.client.dto;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-public interface FetchUserDto {
+public interface FetchClientDto {
     UUID getId();
 
     Integer getPassportNumber();

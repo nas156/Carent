@@ -1,7 +1,7 @@
-package com.project.carent.user;
+package com.project.carent.client;
 
-import com.project.carent.user.dto.FetchUserDto;
-import com.project.carent.user.dto.UserDto;
+import com.project.carent.client.dto.FetchClientDto;
+import com.project.carent.client.dto.ClientDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/clients")
+public class ClientController {
 
-    final UserService userService;
+    final ClientService clientService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     @GetMapping(value = "/health-check")
@@ -24,27 +24,27 @@ public class UserController {
     }
 
     @GetMapping(value = "/all")
-    public List<FetchUserDto> getAllUsers() {
-        return userService.getAllUsers();
+    public List<FetchClientDto> getAllUsers() {
+        return clientService.getAllUsers();
     }
 
     @PutMapping(value = "/edit")
-    public ResponseEntity<?> editUser(@RequestParam UUID id, @RequestBody UserDto userDto) {
-        return ResponseEntity.accepted().body(userService.editUser(id, userDto));
+    public ResponseEntity<?> editUser(@RequestParam UUID id, @RequestBody ClientDto clientDto) {
+        return ResponseEntity.accepted().body(clientService.editUser(id, clientDto));
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") UUID id) {
-        return ResponseEntity.ok(userService.deleteUserById(id));
+        return ResponseEntity.ok(clientService.deleteUserById(id));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addUser(@RequestBody UserDto userDto) {
-        return ResponseEntity.accepted().body(userService.addUser(userDto));
+    public ResponseEntity<?> addUser(@RequestBody ClientDto clientDto) {
+        return ResponseEntity.accepted().body(clientService.addUser(clientDto));
     }
 
     @GetMapping("/passports")
     public ResponseEntity<?> getAllUsersPassports() {
-        return ResponseEntity.ok().body(userService.getPassports());
+        return ResponseEntity.ok().body(clientService.getPassports());
     }
 }

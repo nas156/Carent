@@ -5,7 +5,6 @@ import {addUserRequest, deleteUserRequest, editUserRequest, getAllUsers} from ".
 function* loadUsers() {
     yield put(loadUsersRoutine.request());
     const users = yield call(() => getAllUsers());
-    console.log(users)
     yield put(loadUsersRoutine.success({users: users}));
 }
 
@@ -15,7 +14,9 @@ function* watchLoadUsers() {
 
 function* addUser(action) {
     const newCar = action.payload;
+    yield put(addUserRoutine.request());
     yield call(() => addUserRequest(newCar));
+    yield put(addUserRoutine.success());
     yield put(loadUsersRoutine.trigger());
 }
 
@@ -37,7 +38,9 @@ function* watchDeleteUser() {
 
 function* editUser(action) {
     const {id, user} = action.payload;
+    yield put(editUserRoutine.request(id));
     yield call(() => editUserRequest(id, user));
+    yield put(editUserRoutine.success());
     yield put(loadUsersRoutine.trigger());
 }
 

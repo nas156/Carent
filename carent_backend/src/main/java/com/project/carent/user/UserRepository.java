@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -23,4 +24,9 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query(value = "update User u set u.firstName = :firstName, u.lastName = :lastName," +
             "u.passportNumber = :passportNumber, u.password = :password, u.editDate = :date where u.id = :id")
     void editUser(UUID id, String firstName, String lastName, Integer passportNumber, String password, LocalDate date);
+
+    @Query(value = "select u.passportNumber from User u")
+    List<Integer> getAllPassports();
+
+    Optional<User> findUserByPassportNumber(Integer passportNumber);
 }

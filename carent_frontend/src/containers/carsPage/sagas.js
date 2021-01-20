@@ -14,7 +14,9 @@ function* watchLoadCars() {
 
 function* addCar(action) {
     const newCar = action.payload;
+    yield put(addCarRoutine.request());
     yield call(() => addCarRequest(newCar));
+    yield put(addCarRoutine.success());
     yield put(loadCarsRoutine.trigger());
 }
 
@@ -36,7 +38,9 @@ function* watchDeleteCar() {
 
 function* editCar(action) {
     const {id, car} = action.payload;
+    yield put(editCarRoutine.request(id));
     yield call(() => editCarRequest(id, car));
+    yield put(editCarRoutine.success());
     yield put(loadCarsRoutine.trigger());
 }
 

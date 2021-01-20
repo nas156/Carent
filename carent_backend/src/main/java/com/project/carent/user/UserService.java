@@ -19,7 +19,11 @@ public class UserService {
     }
 
     public User getUserById(UUID id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
+    }
+
+    public User getUserByPassport(Integer passport) {
+        return userRepository.findUserByPassportNumber(passport).orElseThrow(() -> new UserNotFoundException(passport.toString()));
     }
 
     public UUID deleteUserById(UUID id) {
@@ -42,5 +46,9 @@ public class UserService {
                 userDto.getLastName(), userDto.getPassportNumber(),
                 userDto.getPassword(), LocalDate.now());
         return userDto;
+    }
+
+    public List<Integer> getPassports() {
+        return userRepository.getAllPassports();
     }
 }

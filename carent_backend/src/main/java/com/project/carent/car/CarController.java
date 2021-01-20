@@ -37,5 +37,10 @@ public class CarController {
     public ResponseEntity<?> editCar(@RequestBody CarDto carDto, @RequestParam UUID id) {
         return ResponseEntity.accepted().body(carService.editCar(carDto, id));
     }
+
+    @GetMapping("/numbers")
+    public ResponseEntity<?> getAllCarsNumbers() {
+        return ResponseEntity.ok().body(carService.getNumbers());
+    }
 }
 

@@ -4,15 +4,15 @@ import java.util.UUID;
 
 public class CarNotFoundException extends RuntimeException {
 
-    private final UUID id;
+    private final String idetnifier;
 
-    public CarNotFoundException(UUID id) {
+    public CarNotFoundException(String idetnifier) {
         super();
-        this.id = id;
+        this.idetnifier = idetnifier;
     }
 
     @Override
     public String getMessage() {
-        return id.toString();
+        return idetnifier;
     }
 }

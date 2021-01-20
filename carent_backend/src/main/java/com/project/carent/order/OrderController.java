@@ -33,9 +33,5 @@ public class OrderController {
         return ResponseEntity.ok().body(orderService.deleteOrderById(id));
     }
 
-    @PostMapping(value = "/edit")
-    public ResponseEntity<?> editOrder(@RequestParam UUID id, @RequestBody OrderDto orderDto) {
-        return ResponseEntity.accepted().body(orderService.editOrder(id, orderDto));
-    }
 
 }

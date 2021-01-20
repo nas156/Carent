@@ -1,4 +1,4 @@
-import {deleteCarRoutine, loadCarsRoutine} from "./routines";
+import {addCarRoutine, deleteCarRoutine, editCarRoutine, loadCarsRoutine} from "./routines";
 
 const initialState = {
     cars: [],
@@ -28,7 +28,6 @@ export default function (state = initialState, action) {
 
         case deleteCarRoutine.REQUEST: {
             const id = action.payload;
-            console.log(id);
             return ({
                 ...state,
                 isDeleting: id
@@ -39,6 +38,35 @@ export default function (state = initialState, action) {
             return ({
                ...state,
                isDeleting: ""
+            });
+        }
+
+        case addCarRoutine.REQUEST: {
+            return ({
+                ...state,
+                isAdding: true
+            });
+        }
+
+        case addCarRoutine.SUCCESS: {
+            return ({
+                ...state,
+                isAdding: false
+            });
+        }
+
+        case editCarRoutine.REQUEST: {
+            const id = action.payload;
+            return ({
+                ...state,
+                isEditing: id
+            });
+        }
+
+        case editCarRoutine.SUCCESS: {
+            return ({
+                ...state,
+                isEditing: ""
             });
         }
 

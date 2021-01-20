@@ -1,18 +1,16 @@
 package com.project.carent.exception;
 
-import java.util.UUID;
-
 public class UserNotFoundException extends RuntimeException {
 
-    private final UUID id;
+    private final String identifier;
 
-    public UserNotFoundException(UUID id) {
+    public UserNotFoundException(String identifier) {
         super();
-        this.id = id;
+        this.identifier = identifier;
     }
 
     @Override
     public String getMessage() {
-        return id.toString();
+        return identifier;
     }
 }

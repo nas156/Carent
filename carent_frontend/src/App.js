@@ -5,6 +5,7 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import Cars from "./containers/carsPage";
 import Users from "./containers/userPage";
+import Orders from "./containers/ordersPage";
 
 
 class App extends React.Component {
@@ -13,6 +14,7 @@ class App extends React.Component {
             <div className="carentApp">
                 <Header/>
                 <Switch>
+                    <Route exact path="/orders" component={Orders}/>
                     <Route exact path="/cars" component={Cars}/>
                     <Route exact path="/users" component={Users}/>
                 </Switch>

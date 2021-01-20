@@ -35,16 +35,12 @@ public class OrderService {
     public UUID createOrder(OrderDto orderDto) {
         var order = Order
                 .builder()
-                .car(carService.getCarById(orderDto.getCarId()))
-                .user(userService.getUserById(orderDto.getUserId()))
+                .car(carService.getCarByNumber(orderDto.getCarNumber()))
+                .user(userService.getUserByPassport(orderDto.getUserPassport()))
                 .addDate(LocalDate.now())
                 .rentalTime(orderDto.getRentalTime())
                 .build();
         return orderRepository.save(order).getId();
     }
 
-    public OrderDto editOrder(UUID id, OrderDto orderDto) {
-        orderRepository.editOrder(id, orderDto.getUserId(), orderDto.getCarId(), orderDto.getRentalTime());
-        return orderDto;
-    }
 }

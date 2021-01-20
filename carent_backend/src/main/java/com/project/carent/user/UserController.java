@@ -38,8 +38,13 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteUserById(id));
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<?> addUser(@RequestBody UserDto userDto) {
         return ResponseEntity.accepted().body(userService.addUser(userDto));
+    }
+
+    @GetMapping("/passports")
+    public ResponseEntity<?> getAllUsersPassports() {
+        return ResponseEntity.ok().body(userService.getPassports());
     }
 }

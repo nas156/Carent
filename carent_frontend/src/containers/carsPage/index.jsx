@@ -68,7 +68,7 @@ const Cars = ({
         <div className="mainTable">
             <ItemsTable
                 loading={loading}
-                addButton={{"onAdd": onAddClick, "loading": adding}}
+                addButton={{"onAdd": onAddClick, "loading": adding, "text": "Add car"}}
                 columns={["Number", "Description", "Rental cost", "Number of rents"]}
                 buttons={[
                     {"name": "Edit", "click": onEditClick, "color": "blue", "disabled": editing},
@@ -83,18 +83,31 @@ const Cars = ({
                 onApplyClick={editApplyClick}
                 content={{
                     "icon": "car",
-                    "title": "Change car",
+                    "title": "Change/Add car",
                     "fields":
                         [
-                            {"name": "Number", "value": number, "change": setNumber, "blocked": Boolean(currentId)},
-                            {"name": "Rental cost", "value": rentalCost, "change": setRentalCost},
+                            {
+                                "name": "Number",
+                                "value": number,
+                                "change": setNumber,
+                                "blocked": Boolean(currentId)
+                            },
+                            {
+                                "name": "Rental cost",
+                                "value": rentalCost,
+                                "change": setRentalCost
+                            },
                             {
                                 "name": "Number of rents",
                                 "value": numberOfRents,
                                 "change": setNumberOfRents,
                                 "blocked": true
                             },
-                            {"name": "Description", "value": description, "change": setDescription}
+                            {
+                                "name": "Description",
+                                "value": description,
+                                "change": setDescription
+                            }
                         ]
                 }}
             />

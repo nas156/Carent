@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class OrderDto {
-    UUID userId;
-    UUID carId;
+    Integer userPassport;
+    Integer carNumber;
     Integer rentalTime;
 }

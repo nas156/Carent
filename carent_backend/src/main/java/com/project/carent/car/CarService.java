@@ -29,7 +29,11 @@ public class CarService {
     }
 
     public Car getCarById(UUID id) {
-        return carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(id));
+        return carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(id.toString()));
+    }
+
+    public Car getCarByNumber(Integer number) {
+        return carRepository.findCarByNumber(number).orElseThrow(() -> new CarNotFoundException(number.toString()));
     }
 
     public UUID deleteCarById(UUID id) {
@@ -43,5 +47,9 @@ public class CarService {
                 carDto.getDescription(),
                 carDto.getRentalCost());
         return carDto;
+    }
+
+    public List<Integer> getNumbers() {
+        return carRepository.getAllNumbers();
     }
 }

@@ -24,4 +24,7 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
     List<FetchCarDto> getAllCars();
 
     Optional<Car> findCarByNumber(Integer number);
+
+    @Query(value = "select c.number from Car c")
+    List<Integer> getAllNumbers();
 }

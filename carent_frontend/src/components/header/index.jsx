@@ -1,16 +1,20 @@
 import React, {useState} from "react";
 import style from "./header.module.css"
-import {Menu} from "semantic-ui-react";
+import {Icon, Menu} from "semantic-ui-react";
 import {useHistory} from "react-router";
 
 const Header = (props) => {
     const [activeItem, setActiveItem] = useState("cars");
 
     const history = useHistory();
-    
+
     const handleItemClick = (e, {name}) => {
         setActiveItem(name);
-        history.push(`/${name}`)
+        if (name === "logout") {
+            props.logout();
+            return;
+        }
+        history.push(`/${name}`);
     };
 
     return (
@@ -32,6 +36,10 @@ const Header = (props) => {
                     onClick={handleItemClick}
                 />
                 <Menu.Menu position='right'>
+                    <Menu.Item>
+                        <Icon name='like'/>
+                        {`Hi, ${props.user.name}`}
+                    </Menu.Item>
                     <Menu.Item
                         name='logout'
                         active={activeItem === 'logout'}

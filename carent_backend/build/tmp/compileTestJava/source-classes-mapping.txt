@@ -1,4 +1,0 @@
-com/project/carent/CarentApplicationTests.java
- com.project.carent.CarentApplicationTests
-com/project/carent/repository/CarRepositoryTest.java
- com.project.carent.repository.CarRepositoryTest

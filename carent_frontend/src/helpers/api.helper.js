@@ -6,23 +6,14 @@ function getFetchUrl(args) {
 
 function getFetchArgs(args) {
     const headers = {};
-    if (!args.attachment) {
-        headers['Content-Type'] = 'application/json';
-        headers.Accept = 'application/json';
-    }
+    headers['Content-Type'] = 'application/json';
+    headers.Accept = 'application/json';
     const token = localStorage.getItem('token');
     if (token && !args.skipAuthorization) {
         headers.Authorization = `Bearer ${token}`;
     }
     let body;
-    if (args.attachment) {
-        if (args.type === 'GET') {
-            throw new Error('GET request does not support attachments.');
-        }
-        const formData = new FormData();
-        formData.append('image', args.attachment);
-        body = formData;
-    } else if (args.request) {
+    if (args.request) {
         if (args.type === 'GET') {
             throw new Error('GET request does not support request body.');
         }
@@ -32,7 +23,7 @@ function getFetchArgs(args) {
         method: args.type,
         headers,
         signal: args.ct,
-        ...(args.request === 'GET' ? {} : { body })
+        ...(args.request === 'GET' ? {} : {body})
     };
 }
 
@@ -42,7 +33,6 @@ export async function throwIfResponseFailed(res) {
         try {
             parsedException = await res.json();
         } catch (err) {
-            //
         }
         throw parsedException;
     }

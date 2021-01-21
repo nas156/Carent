@@ -5,7 +5,6 @@ import com.project.carent.auth.dto.UserLoginDto;
 import com.project.carent.auth.dto.UserRegisterDto;
 import com.project.carent.user.User;
 import com.project.carent.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,12 +42,11 @@ public class AuthService {
         Authentication auth;
         try {
             auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-        }
-        catch (BadCredentialsException e) {
+        } catch (BadCredentialsException e) {
             throw new Exception("Incorrect username or password", e);
         }
 
-        var currentUser = (AuthUser)auth.getPrincipal();
+        var currentUser = (AuthUser) auth.getPrincipal();
         final var userDetails = userDetailsService.getUserById(currentUser.getId());
         final String jwt = tokenService.generateToken(currentUser);
         return new AuthUserDto(jwt, userDetails);

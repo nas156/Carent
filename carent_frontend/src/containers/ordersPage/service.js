@@ -28,7 +28,7 @@ export const deleteOrderRequest = async orderId => {
 
 export const getUsersPassportsRequest = async () => {
     const response = await callWebApi({
-        endpoint: "/api/users/passports",
+        endpoint: "/api/clients/passports",
         type: "GET"
     });
     return response.json();

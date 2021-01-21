@@ -48,7 +48,7 @@ function* watchEditUser() {
     yield takeEvery(editUserRoutine.TRIGGER, editUser);
 }
 
-export default function* notifySagas() {
+export default function* usersSagas() {
     yield all([
         watchLoadUsers(),
         watchAddUser(),

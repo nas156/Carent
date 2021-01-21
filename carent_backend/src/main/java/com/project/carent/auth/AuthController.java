@@ -3,10 +3,10 @@ package com.project.carent.auth;
 import com.project.carent.auth.dto.AuthUserDto;
 import com.project.carent.auth.dto.UserLoginDto;
 import com.project.carent.auth.dto.UserRegisterDto;
-import com.project.carent.user.UserService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")

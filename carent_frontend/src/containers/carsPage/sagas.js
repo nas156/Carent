@@ -48,7 +48,7 @@ function* watchEditCar() {
     yield takeEvery(editCarRoutine.TRIGGER, editCar);
 }
 
-export default function* notifySagas() {
+export default function* carsSagas() {
     yield all([
         watchLoadCars(),
         watchAddCar(),

@@ -60,7 +60,7 @@ function* watchGetOptions() {
     yield takeEvery(loadUserNumbersAndCarNumbersRoutine.TRIGGER, getOptions);
 }
 
-export default function* notifySagas() {
+export default function* ordersSagas() {
     yield all([
         watchLoadOrders(),
         watchCreateOrder(),

@@ -9,3 +9,10 @@
     align-self: center;
     width: 80%;
 }
+
+.mainBox {
+    width: 25%;
+    position: absolute;
+    top: 25%;
+    align-self: center;
+}

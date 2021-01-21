@@ -1,10 +1,10 @@
 package com.project.carent.exception;
 
-public class UserNotFoundException extends RuntimeException {
+public class ClientNotFoundException extends RuntimeException {
 
     private final String identifier;
 
-    public UserNotFoundException(String identifier) {
+    public ClientNotFoundException(String identifier) {
         super();
         this.identifier = identifier;
     }

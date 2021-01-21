@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {addUserRoutine, deleteUserRoutine, editUserRoutine, loadUsersRoutine} from "./routines";
+import {addClientRoutine, deleteClientRoutine, editClientRoutine, loadClientsRoutine} from "./routines";
 import ItemsTable from "../../components/table";
 import {connect} from "react-redux";
 import AddEditModal from "../../components/addOrEditModal";
 
-const Users = ({
-                  users, loadUsersRoutine: load, addUserRoutine: add,
-                  deleteUserRoutine: del, editUserRoutine: edit, loading, editing, deleting, adding
+const Clients = ({
+                  clients, loadClientsRoutine: load, addClientRoutine: add,
+                  deleteClientRoutine: del, editClientRoutine: edit, loading, editing, deleting, adding
               }) => {
 
     const [showModal, setShowModal] = useState(false);
@@ -35,7 +35,7 @@ const Users = ({
     }
 
     const editApplyClick = () => {
-        const newUser = {
+        const newClient = {
             "firstName": firstName,
             "lastName": lastName,
             "numberOfOrders": numberOfOrders,
@@ -43,9 +43,9 @@ const Users = ({
             "passportNumber": passportNumber
         };
         if (currentId) {
-            edit({id: currentId, user: newUser});
+            edit({id: currentId, client: newClient});
         } else {
-            add(newUser);
+            add(newClient);
         }
         clearState();
     }
@@ -54,17 +54,17 @@ const Users = ({
         setShowModal(true);
     }
 
-    const onDeleteClick = user => {
-        del(user.id);
+    const onDeleteClick = client => {
+        del(client.id);
     }
 
-    const onEditClick = user => {
-        setCurrentId(user.id);
-        setFirstName(user.firstName);
-        setAddDate(user.addDate);
-        setLastName(user.lastName);
-        setNumberOfOrders(user.numberOfOrders);
-        setPassportNumber(user.passportNumber);
+    const onEditClick = client => {
+        setCurrentId(client.id);
+        setFirstName(client.firstName);
+        setAddDate(client.addDate);
+        setLastName(client.lastName);
+        setNumberOfOrders(client.numberOfOrders);
+        setPassportNumber(client.passportNumber);
         setShowModal(true);
     }
 
@@ -72,13 +72,13 @@ const Users = ({
         <div className="mainTable">
             <ItemsTable
                 loading={loading}
-                addButton={{"onAdd": onAddClick, "loading": adding, "text":"Add user"}}
+                addButton={{"onAdd": onAddClick, "loading": adding, "text":"Add client"}}
                 columns={["First name", "Last name", "Passport number", "Add date", "Number of rents"]}
                 buttons={[
                     {"name": "Edit", "click": onEditClick, "color": "blue", "disabled": editing},
                     {"name": "Delete", "click": onDeleteClick, "color": "red", "disabled": deleting},
                 ]}
-                content={users}
+                content={clients}
                 color="orange"
             />
             <AddEditModal
@@ -87,7 +87,7 @@ const Users = ({
                 onApplyClick={editApplyClick}
                 content={{
                     "icon": "user",
-                    "title": "Change/Add user",
+                    "title": "Change/Add client",
                     "fields":
                         [
                             {
@@ -128,21 +128,21 @@ const Users = ({
 
 const mapStateToProps = rootState => (
     {
-        users: rootState.users.users,
-        loading: rootState.users.isLoading,
-        deleting: rootState.users.isDeleting,
-        editing: rootState.users.isEditing,
-        adding: rootState.users.adding
+        clients: rootState.clients.clients,
+        loading: rootState.clients.isLoading,
+        deleting: rootState.clients.isDeleting,
+        editing: rootState.clients.isEditing,
+        adding: rootState.clients.adding
     }
 );
 
 const mapDispatchToProps =
     {
-        loadUsersRoutine,
-        editUserRoutine,
-        addUserRoutine,
-        deleteUserRoutine
+        loadClientsRoutine,
+        editClientRoutine,
+        addClientRoutine,
+        deleteClientRoutine
     };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(Clients);

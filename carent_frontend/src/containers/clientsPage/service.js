@@ -1,6 +1,6 @@
 import callWebApi from "../../helpers/api.helper";
 
-export const getAllUsers = async () => {
+export const getAllClients = async () => {
     const response = await callWebApi({
         endpoint: "/api/clients/all",
         type: "GET"
@@ -8,30 +8,30 @@ export const getAllUsers = async () => {
     return response.json();
 };
 
-export const addUserRequest = async user => {
+export const addClientRequest = async client => {
     const response = await callWebApi({
         endpoint: "/api/clients/add",
         type: "POST",
-        request: user
+        request: client
     });
     return response.json();
 };
 
-export const deleteUserRequest = async userId => {
+export const deleteClientRequest = async clientId => {
     const response = await callWebApi({
         endpoint: "/api/clients/one",
         type: "DELETE",
-        query: {id: userId}
+        query: {id: clientId}
     });
     return response.json();
 };
 
-export const editUserRequest = async (userId, user) => {
+export const editClientRequest = async (clientId, client) => {
     const response = await callWebApi({
         endpoint: "/api/clients/edit",
         type: "PUT",
-        query: {id: userId},
-        request: user
+        query: {id: clientId},
+        request: client
     });
     return response.json();
 };

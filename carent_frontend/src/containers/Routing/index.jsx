@@ -6,7 +6,7 @@ import {Route, Switch} from "react-router";
 import LoginPage from "../Auth/LoginPage";
 import Orders from "../ordersPage";
 import Cars from "../carsPage";
-import Users from "../userPage";
+import Users from "../clientsPage";
 import Footer from "../../components/footer";
 import RegisterPage from "../Auth/RegisterPage";
 import PublicRoute from "../PublicRoute";
@@ -28,7 +28,7 @@ const Routing = ({user, isAuthorized, getUserRoutine: getUser, logoutRoutine: lo
                     <PublicRoute  exact path="/register" component={RegisterPage}/>
                     <PrivateRoute exact path="/orders" component={Orders}/>
                     <PrivateRoute exact path="/cars" component={Cars}/>
-                    <PrivateRoute exact path="/users" component={Users}/>
+                    <PrivateRoute exact path="/clients" component={Users}/>
                 </Switch>
             {isAuthorized && <Footer />}
         </div>

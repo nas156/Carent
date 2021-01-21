@@ -1,7 +1,7 @@
-import {addUserRoutine, deleteUserRoutine, editUserRoutine, loadUsersRoutine} from "./routines";
+import {addClientRoutine, deleteClientRoutine, editClientRoutine, loadClientsRoutine} from "./routines";
 
 const initialState = {
-    users: [],
+    clients: [],
     isLoading: false,
     isEditing: "",
     isDeleting: "",
@@ -10,23 +10,23 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case loadUsersRoutine.SUCCESS: {
-            const users = action.payload.users;
+        case loadClientsRoutine.SUCCESS: {
+            const clients = action.payload.clients;
             return ({
                 ...state,
                 isLoading: false,
-                users: users
+                clients: clients
             });
         }
 
-        case loadUsersRoutine.REQUEST: {
+        case loadClientsRoutine.REQUEST: {
             return ({
                 ...state,
                 isLoading: true
             });
         }
 
-        case deleteUserRoutine.REQUEST: {
+        case deleteClientRoutine.REQUEST: {
             const id = action.payload;
             return ({
                 ...state,
@@ -34,28 +34,28 @@ export default function (state = initialState, action) {
             });
         }
 
-        case deleteUserRoutine.SUCCESS: {
+        case deleteClientRoutine.SUCCESS: {
             return ({
                 ...state,
                 isDeleting: ""
             });
         }
 
-        case addUserRoutine.REQUEST: {
+        case addClientRoutine.REQUEST: {
             return ({
                 ...state,
                 isAdding: true
             });
         }
 
-        case addUserRoutine.SUCCESS: {
+        case addClientRoutine.SUCCESS: {
             return ({
                 ...state,
                 isAdding: false
             });
         }
 
-        case editUserRoutine.REQUEST: {
+        case editClientRoutine.REQUEST: {
             const id = action.payload;
             return ({
                 ...state,
@@ -63,7 +63,7 @@ export default function (state = initialState, action) {
             });
         }
 
-        case editUserRoutine.SUCCESS: {
+        case editClientRoutine.SUCCESS: {
             return ({
                 ...state,
                 isEditing: ""

@@ -31,8 +31,8 @@ const Header = (props) => {
                     onClick={handleItemClick}
                 />
                 <Menu.Item
-                    name='users'
-                    active={activeItem === 'users'}
+                    name='clients'
+                    active={activeItem === 'clients'}
                     onClick={handleItemClick}
                 />
                 <Menu.Menu position='right'>

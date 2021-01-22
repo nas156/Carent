@@ -2,6 +2,7 @@ package com.project.carent.car;
 
 import com.project.carent.car.dto.CarDto;
 import com.project.carent.car.dto.FetchCarDto;
+import com.project.carent.car.dto.NumberDescriptionDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,27 +20,27 @@ public class CarController {
     }
 
     @GetMapping(value = "/all")
-    public List<FetchCarDto> getAllCars() {
-        return carService.getAllCars();
+    public ResponseEntity<List<FetchCarDto>> getAllCars() {
+        return ResponseEntity.ok().body(carService.getAllCars());
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addCar(@RequestBody CarDto car) {
+    public ResponseEntity<UUID> addCar(@RequestBody CarDto car) {
         return ResponseEntity.accepted().body(carService.addCar(car));
     }
 
     @DeleteMapping(value = "/one")
-    public ResponseEntity<?> deleteCar(@RequestParam UUID id) {
+    public ResponseEntity<UUID> deleteCar(@RequestParam UUID id) {
         return ResponseEntity.ok().body(carService.deleteCarById(id));
     }
 
     @PutMapping(value = "/edit")
-    public ResponseEntity<?> editCar(@RequestBody CarDto carDto, @RequestParam UUID id) {
+    public ResponseEntity<CarDto> editCar(@RequestBody CarDto carDto, @RequestParam UUID id) {
         return ResponseEntity.accepted().body(carService.editCar(carDto, id));
     }
 
     @GetMapping("/numbers")
-    public ResponseEntity<?> getAllCarsNumbers() {
+    public ResponseEntity<List<NumberDescriptionDto>> getAllCarsNumbers() {
         return ResponseEntity.ok().body(carService.getNumbers());
     }
 }

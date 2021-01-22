@@ -35,12 +35,17 @@ const Orders = ({
         clearState();
     }
 
-    const prepareOptions = (list) => (
+    const preparePassportOptions = (list) => (
         list.map(item => (
-            { key: item, text: item, value: item }
+            { key: item.passportNumber, text: `${item.passportNumber}, ${item.name}`, value: item.passportNumber }
         ))
     )
 
+    const prepareNumberOptions = (list) => (
+        list.map(item => (
+            { key: item.number, text: `${item.number}, ${item.description}`, value: item.number }
+        ))
+    )
 
     const createApplyClick = () => {
         const newOrder = {
@@ -48,7 +53,6 @@ const Orders = ({
             "userPassport": userPassport,
             "carNumber": carNumber
         };
-        console.log(newOrder)
         create(newOrder);
         clearState();
     }
@@ -67,7 +71,6 @@ const Orders = ({
             <ItemsTable
                 loading={loading}
                 addButton={{"onAdd": onCreateClick, "loading": creating, "text": "Create order"}}
-                columns={["Rental cost", "User passport", "Rental time(hours)", "Car number", "Date"]}
                 buttons={[
                     {"name": "Delete", "click": onDeleteClick, "color": "red", "disabled": deleting},
                 ]}
@@ -90,7 +93,7 @@ const Orders = ({
                             },
                             {
                                 "dropdown": true,
-                                "options": prepareOptions(passportOptions),
+                                "options": preparePassportOptions(passportOptions),
                                 "loading": loadingOptions,
                                 "name": "User passport",
                                 "value": userPassport,
@@ -98,7 +101,7 @@ const Orders = ({
                             },
                             {
                                 "dropdown": true,
-                                "options": prepareOptions(numberOptions),
+                                "options": prepareNumberOptions(numberOptions),
                                 "loading": loadingOptions,
                                 "name": "Car number",
                                 "value": carNumber,

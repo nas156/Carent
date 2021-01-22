@@ -1,20 +1,24 @@
 import React from "react";
 import style from "./table.module.css";
 import {Button, Segment, Table} from "semantic-ui-react";
+import {makePretty} from "../../helpers/naming,helper";
 
-const ItemsTable = ({columns, buttons, content, color, addButton, loading}) => (
+const ItemsTable = ({buttons, content, color, addButton, loading}) => (
     <Segment loading={loading} basic className={style.table}>
         <Table color={color} celled definition>
             <Table.Header fullWidth>
-                <Table.Row>
-                    {columns.map(item => (
-                        <Table.HeaderCell key={item}>
-                            {item}
-                        </Table.HeaderCell>
-                    ))}
-                    {buttons ?
-                        <Table.HeaderCell width={Math.round(buttons.length * 1.3)}>Actions</Table.HeaderCell> : null}
-                </Table.Row>
+                {(content.length > 0) ?
+                    <Table.Row>
+                        {Object.keys(content[0]).filter(item => item !== "id").map(item => (
+                            <Table.HeaderCell key={item}>
+                                {makePretty(item)}
+                            </Table.HeaderCell>
+                        ))}
+                        {buttons ?
+                            <Table.HeaderCell
+                                width={Math.round(buttons.length * 1.3)}>Actions</Table.HeaderCell> : null}
+                    </Table.Row>
+                    : null}
             </Table.Header>
             <Table.Body>
                 {content.map(item => (
@@ -40,7 +44,8 @@ const ItemsTable = ({columns, buttons, content, color, addButton, loading}) => (
                 ))}
             </Table.Body>
         </Table>
-        <Button color='green' floated='right' onClick={addButton.onAdd} disabled={addButton.loading}> {addButton.text} </Button>
+        <Button color='green' floated='right' onClick={addButton.onAdd}
+                disabled={addButton.loading}> {addButton.text} </Button>
     </Segment>
 );
 

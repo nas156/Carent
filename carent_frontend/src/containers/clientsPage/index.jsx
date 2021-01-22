@@ -24,6 +24,7 @@ const Clients = ({
     const clearState = () => {
         setShowModal(false);
         setFirstName("");
+        setPassportNumber("");
         setLastName("");
         setAddDate("");
         setNumberOfOrders("");
@@ -38,8 +39,6 @@ const Clients = ({
         const newClient = {
             "firstName": firstName,
             "lastName": lastName,
-            "numberOfOrders": numberOfOrders,
-            "addDate": addDate,
             "passportNumber": passportNumber
         };
         if (currentId) {
@@ -73,7 +72,6 @@ const Clients = ({
             <ItemsTable
                 loading={loading}
                 addButton={{"onAdd": onAddClick, "loading": adding, "text":"Add client"}}
-                columns={["First name", "Last name", "Passport number", "Add date", "Number of rents"]}
                 buttons={[
                     {"name": "Edit", "click": onEditClick, "color": "blue", "disabled": editing},
                     {"name": "Delete", "click": onDeleteClick, "color": "red", "disabled": deleting},

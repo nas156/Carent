@@ -15,7 +15,7 @@ public interface OrderRepository extends JpaRepository<Order, UUID> {
 
     @Query(value = "select o.id as id, o.addDate as addDate, o.rentalTime as rentalTime," +
             "o.client.passportNumber as userPassport, o.car.number as carNumber," +
-            "o.car.rentalCost as rentalCost from Order o order by o.addDate")
+            "o.car.rentalCost as rentalCost from Order o order by o.addDate desc")
     List<FetchOrderDto> getAllOrders();
 
     @Transactional

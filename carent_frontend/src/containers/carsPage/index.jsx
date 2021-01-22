@@ -69,7 +69,6 @@ const Cars = ({
             <ItemsTable
                 loading={loading}
                 addButton={{"onAdd": onAddClick, "loading": adding, "text": "Add car"}}
-                columns={["Number", "Description", "Rental cost", "Number of rents"]}
                 buttons={[
                     {"name": "Edit", "click": onEditClick, "color": "blue", "disabled": editing},
                     {"name": "Delete", "click": onDeleteClick, "color": "red", "disabled": deleting},

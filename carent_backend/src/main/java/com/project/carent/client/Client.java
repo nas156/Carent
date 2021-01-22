@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -29,9 +30,6 @@ public class Client {
     @Column(name = "passport_number", unique = true)
     private Integer passportNumber;
 
-    @Column(name = "password")
-    private String password;
-
     @Column(name = "first_name")
     private String firstName;
 
@@ -44,7 +42,10 @@ public class Client {
     @Column(name = "edit_date")
     private LocalDate editDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    @Formula("concat(first_name, ' ', last_name)")
+    private String fullName;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "client")
     private List<Order> orders;
 
     public static Client fromDto(ClientDto clientDto) {
@@ -52,7 +53,6 @@ public class Client {
                 .builder()
                 .firstName(clientDto.getFirstName())
                 .lastName(clientDto.getLastName())
-                .password(clientDto.getPassword())
                 .passportNumber(clientDto.getPassportNumber())
                 .build();
     }

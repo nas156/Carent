@@ -1,6 +1,7 @@
 package com.project.carent.car;
 
 import com.project.carent.car.dto.FetchCarDto;
+import com.project.carent.car.dto.NumberDescriptionDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +26,6 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
 
     Optional<Car> findCarByNumber(Integer number);
 
-    @Query(value = "select c.number from Car c")
-    List<Integer> getAllNumbers();
+    @Query(value = "select c.number as number, c.description as description from Car c")
+    List<NumberDescriptionDto> getAllNumbers();
 }

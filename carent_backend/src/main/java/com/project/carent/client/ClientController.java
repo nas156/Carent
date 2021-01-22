@@ -2,6 +2,7 @@ package com.project.carent.client;
 
 import com.project.carent.client.dto.FetchClientDto;
 import com.project.carent.client.dto.ClientDto;
+import com.project.carent.client.dto.PassportNameDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,18 +34,18 @@ public class ClientController {
         return ResponseEntity.accepted().body(clientService.editUser(id, clientDto));
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable("id") UUID id) {
-        return ResponseEntity.ok(clientService.deleteUserById(id));
+    @DeleteMapping(value = "/one")
+    public ResponseEntity<UUID> deleteById(@RequestParam UUID id) {
+        return ResponseEntity.ok().body(clientService.deleteUserById(id));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addUser(@RequestBody ClientDto clientDto) {
+    public ResponseEntity<UUID> addUser(@RequestBody ClientDto clientDto) {
         return ResponseEntity.accepted().body(clientService.addUser(clientDto));
     }
 
     @GetMapping("/passports")
-    public ResponseEntity<?> getAllUsersPassports() {
+    public ResponseEntity<List<PassportNameDto>> getAllUsersPassports() {
         return ResponseEntity.ok().body(clientService.getPassports());
     }
 }

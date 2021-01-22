@@ -10,8 +10,8 @@ const initialState = {
     isLoading: false,
     isDeleting: "",
     isCreating: false,
-    passports: [],
-    numbers: [],
+    passports: [{}],
+    numbers: [{}],
     loadingOptions: false
 };
 

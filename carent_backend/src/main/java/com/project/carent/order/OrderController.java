@@ -19,8 +19,8 @@ public class OrderController {
     }
 
     @GetMapping(value = "/all")
-    public List<FetchOrderDto> getAllOrders() {
-        return orderService.getAllOrders();
+    public ResponseEntity<List<FetchOrderDto>> getAllOrders() {
+        return ResponseEntity.ok().body(orderService.getAllOrders());
     }
 
     @PostMapping(value = "/create")
@@ -32,6 +32,4 @@ public class OrderController {
     public ResponseEntity<?> deleteOrder(@RequestParam UUID id) {
         return ResponseEntity.ok().body(orderService.deleteOrderById(id));
     }
-
-
 }

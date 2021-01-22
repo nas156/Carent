@@ -14,7 +14,7 @@ const RegisterPage = ({registerRoutine: register, isFetching}) => {
     const [isPasswordValid, setIsPasswordValid] = useState(true);
 
     const onRegisterClick = () => {
-        if (isEmailValid && isPasswordValid) {
+        if (isEmailValid && isPasswordValid && isNameValid) {
             const registerData = {
                 "email": email,
                 "password": password,

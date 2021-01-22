@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ClientDto {
     private Integer passportNumber;
-    private String password;
     private String firstName;
     private String lastName;
 }

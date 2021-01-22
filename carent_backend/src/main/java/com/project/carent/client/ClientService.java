@@ -1,5 +1,6 @@
 package com.project.carent.client;
 
+import com.project.carent.client.dto.PassportNameDto;
 import com.project.carent.exception.ClientNotFoundException;
 import com.project.carent.client.dto.FetchClientDto;
 import com.project.carent.client.dto.ClientDto;
@@ -43,12 +44,11 @@ public class ClientService {
 
     public ClientDto editUser(UUID id, ClientDto clientDto) {
         clientRepository.editUser(id, clientDto.getFirstName(),
-                clientDto.getLastName(), clientDto.getPassportNumber(),
-                clientDto.getPassword(), LocalDate.now());
+                clientDto.getLastName(), clientDto.getPassportNumber(), LocalDate.now());
         return clientDto;
     }
 
-    public List<Integer> getPassports() {
+    public List<PassportNameDto> getPassports() {
         return clientRepository.getAllPassports();
     }
 }

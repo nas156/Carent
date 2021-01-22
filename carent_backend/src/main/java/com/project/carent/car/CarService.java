@@ -2,6 +2,7 @@ package com.project.carent.car;
 
 import com.project.carent.car.dto.CarDto;
 import com.project.carent.car.dto.FetchCarDto;
+import com.project.carent.car.dto.NumberDescriptionDto;
 import com.project.carent.exception.CarNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class CarService {
         return carDto;
     }
 
-    public List<Integer> getNumbers() {
+    public List<NumberDescriptionDto> getNumbers() {
         return carRepository.getAllNumbers();
     }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./table.module.css";
 import {Button, Segment, Table} from "semantic-ui-react";
-import {makePretty} from "../../helpers/naming,helper";
+import {makePretty} from "../../helpers/naming.helper";
 
 const ItemsTable = ({buttons, content, color, addButton, loading}) => (
     <Segment loading={loading} basic className={style.table}>

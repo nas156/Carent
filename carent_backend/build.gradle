@@ -36,9 +36,11 @@ dependencies {
     implementation "io.jsonwebtoken:jjwt-jackson:0.10.5"
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+    runtime("org.flywaydb:flyway-core")
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testImplementation "com.h2database:h2"
 }
 
 test {

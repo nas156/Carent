@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class AuthService {
     private final PasswordEncoder bCryptPasswordEncoder;
@@ -31,6 +33,7 @@ public class AuthService {
                 .email(userDto.getEmail())
                 .name(userDto.getName())
                 .password(userDto.getPassword())
+                .createdAt(LocalDate.now())
                 .build();
         var loginDTO = new UserLoginDto(user.getEmail(), user.getPassword());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

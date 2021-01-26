@@ -1,0 +1,4 @@
+language: minimal
+script:
+  - docker build -t api ./carent_backend
+  - docker build -t client ./carent_frontend

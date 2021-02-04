@@ -27,22 +27,22 @@ public class ClientService {
         return clientRepository.findUserByPassportNumber(passport).orElseThrow(() -> new ClientNotFoundException(passport.toString()));
     }
 
-    public UUID deleteUserById(UUID id) {
+    public UUID deleteClientById(UUID id) {
         clientRepository.deleteById(id);
         return id;
     }
 
-    public UUID addUser(ClientDto clientDto) {
+    public UUID addClient(ClientDto clientDto) {
         var user = Client.fromDto(clientDto);
         user.setAddDate(LocalDate.now());
         return clientRepository.save(user).getId();
     }
 
-    public List<FetchClientDto> getAllUsers() {
+    public List<FetchClientDto> getAllClients() {
         return clientRepository.getAllUsers();
     }
 
-    public ClientDto editUser(UUID id, ClientDto clientDto) {
+    public ClientDto editClient(UUID id, ClientDto clientDto) {
         clientRepository.editUser(id, clientDto.getFirstName(),
                 clientDto.getLastName(), clientDto.getPassportNumber(), LocalDate.now());
         return clientDto;

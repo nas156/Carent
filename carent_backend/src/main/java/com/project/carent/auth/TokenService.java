@@ -1,10 +1,10 @@
 package com.project.carent.auth;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,43 +16,44 @@ import java.util.function.Function;
 
 import static com.project.carent.config.SecurityConstants.EXPIRATION_TIME;
 
+@Slf4j
 @Service
 public class TokenService {
 
     @Value(value = "${jwt.secret-key}")
     private String SECRET_KEY;
 
-    public String extractUserid(String token) {
-        return extractClaim(token, Claims::getSubject);
+    public boolean validateToken(String authToken) {
+        try {
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
+            return true;
+        } catch (SignatureException ex) {
+            log.error("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            log.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            log.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            log.error("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            log.error("JWT claims string is empty.");
+        }
+        return false;
     }
 
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
+    public UUID extractUserid(String tokenString) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(tokenString)
+                .getBody();
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
-    private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-    }
-
-    public Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+        return UUID.fromString(claims.getSubject());
     }
 
     public String generateToken(AuthUser userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getId());
-    }
-
-    private String createToken(Map<String, Object> claims, UUID subject) {
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject.toString())
+                .setSubject(userDetails.getId().toString())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(key, SignatureAlgorithm.HS256)
@@ -61,7 +62,7 @@ public class TokenService {
 
     static public UUID getUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        var currentUserId = (String) auth.getPrincipal();
-        return UUID.fromString(currentUserId);
+        var currentUser = (AuthUser) auth.getPrincipal();
+        return currentUser.getId();
     }
 }

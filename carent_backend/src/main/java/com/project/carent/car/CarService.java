@@ -3,7 +3,7 @@ package com.project.carent.car;
 import com.project.carent.car.dto.CarDto;
 import com.project.carent.car.dto.FetchCarDto;
 import com.project.carent.car.dto.NumberDescriptionDto;
-import com.project.carent.exception.CarNotFoundException;
+import com.project.carent.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +30,11 @@ public class CarService {
     }
 
     public Car getCarById(UUID id) {
-        return carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(id.toString()));
+        return carRepository.findById(id).orElseThrow(() -> new NotFoundException("Car not found id: " + id.toString()));
     }
 
     public Car getCarByNumber(Integer number) {
-        return carRepository.findCarByNumber(number).orElseThrow(() -> new CarNotFoundException(number.toString()));
+        return carRepository.findCarByNumber(number).orElseThrow(() -> new NotFoundException("Car not found id: " + number.toString()));
     }
 
     public UUID deleteCarById(UUID id) {

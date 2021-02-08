@@ -20,10 +20,13 @@ import static com.project.carent.config.SecurityConstants.ROUTES_WHITE_LIST;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserService myUserDetailsService;
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private final UserService myUserDetailsService;
+    private final JwtRequestFilter jwtRequestFilter;
+
+    public SecurityConfiguration(UserService myUserDetailsService, JwtRequestFilter jwtRequestFilter) {
+        this.myUserDetailsService = myUserDetailsService;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -41,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(myUserDetailsService);
+        auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.project.carent.client;
 
 import com.project.carent.client.dto.PassportNameDto;
-import com.project.carent.exception.ClientNotFoundException;
 import com.project.carent.client.dto.FetchClientDto;
 import com.project.carent.client.dto.ClientDto;
+import com.project.carent.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,11 +20,11 @@ public class ClientService {
     }
 
     public Client getUserById(UUID id) {
-        return clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id.toString()));
+        return clientRepository.findById(id).orElseThrow(() -> new NotFoundException("Client not found id: " + id.toString()));
     }
 
     public Client getUserByPassport(Integer passport) {
-        return clientRepository.findUserByPassportNumber(passport).orElseThrow(() -> new ClientNotFoundException(passport.toString()));
+        return clientRepository.findUserByPassportNumber(passport).orElseThrow(() -> new NotFoundException("Client not found id: " + passport));
     }
 
     public UUID deleteClientById(UUID id) {
